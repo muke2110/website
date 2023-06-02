@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your E-commerce Website</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Your Shopping Cart</h2>
+            <div id="cart-items"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Get the cart items element
+        const cartItemsContainer = document.getElementById("cart-items");
+
+        // Function to display the cart items
+        function displayCartItems() {
+            cartItemsContainer.innerHTML = "";
+
+            // Iterate through the cart items
+            for (let item of cartItems) {
+                const itemElement = document.createElement("div");
+                itemElement.className = "cart-item";
+
+                const productName = document.createElement("h3");
+                productName.textContent = "Product: " + item.id;
+                itemElement.appendChild(productName);
+
+                const quantity = document.createElement("p");
+                quantity.textContent = "Quantity: " + item.quantity;
+                itemElement.appendChild(quantity);
+
+                cartItemsContainer.appendChild(itemElement);
+            }
+        }
+
+        // Call the displayCartItems function when the page loads
+        displayCartItems();
+    </script>
+</body>
+</html>

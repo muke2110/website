@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your E-commerce Website</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart <span id="cart-counter"></span></a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            h2.checkout-heading {
+                font-size: 36px; /* Adjust the font size as desired */
+            }
+            <a href="cart.html" class="go-back-button">Back To Cart</a>
+
+            <div id="checkout-summary"></div>
+
+            <p id="total-amount"></p> <!-- Add this element for displaying total amount -->
+
+            <form id="checkout-form">
+                <h3>Shipping Information</h3>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="address">Address:</label>
+                <textarea id="address" required></textarea>
+
+                <h3>Payment Information</h3>
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" required>
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" required>
+
+                <button type="submit">Place Order</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Get the checkout summary element
+        const checkoutSummary = document.getElementById("checkout-summary");
+
+        // Function to display the checkout summary
+        function displayCheckoutSummary() {
+            checkoutSummary.innerHTML = "";
+
+            // Create a table element for the cart items
+            const table = document.createElement("table");
+            table.className = "checkout-table";
+
+            // Create table header
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            const thProduct = document.createElement("th");
+            thProduct.textContent = "Product";
+            const thQuantity = document.createElement("th");
+            thQuantity.textContent = "Quantity";
+            headerRow.appendChild(thProduct);
+            headerRow.appendChild(thQuantity);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create table body
+            const tbody = document.createElement("tbody");
+
+            // Iterate through the cart items
+            for (let item of cartItems) {
+                const product = getProductById(item.id);
+
+                const row = document.createElement("tr");
+                const tdProduct = document.createElement("td");
+
+                // Create a container div for the product information
+                const productContainer = document.createElement("div");
+                productContainer.className = "product-info";
+
+                // Create an image element for the product
+                const productImage = document.createElement("img");
+                productImage.src = product.image;
+                productImage.alt = product.name;
+                productImage.style.width = "100px"; // Set the desired width
+                productImage.style.height = "100px"; // Set the desired height
+                productContainer.appendChild(productImage);
+
+                // Create a span element for the product name
+                const productName = document.createElement("span");
+                productName.textContent = product.name;
+                productContainer.appendChild(productName);
+
+                tdProduct.appendChild(productContainer);
+                tdProduct.style.paddingRight = "200px"; // Add a gap between the columns
+
+
+                const tdQuantity = document.createElement("td");
+                tdQuantity.textContent = item.quantity;
+
+                row.appendChild(tdProduct);
+                row.appendChild(tdQuantity);
+
+                tbody.appendChild(row);
+            }
+
+            table.appendChild(tbody);
+            checkoutSummary.appendChild(table);
+        }
+
+        // Call the displayCheckoutSummary function when the page loads
+        displayCheckoutSummary();
+
+        const totalAmountElement = document.getElementById("total-amount");
+
+        // Calculate and display the total amount to pay
+        function displayTotalAmount() {
+            let totalAmount = 0;
+
+            // Iterate through the cart items
+            for (let item of cartItems) {
+                const product = getProductById(item.id);
+                const amount = product.price * item.quantity;
+                totalAmount += amount;
+            }
+
+            totalAmountElement.textContent = "Total Amount to Pay: $" + totalAmount.toFixed(2);
+        }
+
+        function goBack() {
+            window.history.back();
+        }   
+
+        // Call the displayTotalAmount function when the page loads
+        window.addEventListener("DOMContentLoaded", displayTotalAmount);
+
+        // Get the checkout form element
+        const checkoutForm = document.getElementById("checkout-form");
+
+        // Add an event listener to the checkout form submit event
+        checkoutForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Here you can implement the logic for processing the order and redirecting to a thank you page, or any other desired action.
+            // You can access the form fields using the provided IDs: name, address, card-number, expiry-date, cvv.
+
+            // After processing the order, you may want to clear the cart and display a success message to the user.
+
+            // Clear the cart items
+            cartItems = [];
+            updateCartCounter();
+
+            // Redirect to a thank you page or display a success message
+            // window.location.href = "thankyou.html";
+            // or
+            // const successMessage = document.createElement("p");
+            // successMessage.textContent = "Thank you for your order!";
+            // checkoutForm.reset();
+            // checkoutForm.appendChild(successMessage);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Additional styles for the index.html page */
+        body {
+            background-color: #222;
+            background-image: radial-gradient(#31b938 20%, transparent 20%);
+            background-size: 40px 40px;
+        }
+        
+        main {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        main h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        main p {
+            font-size: 18px;
+            color: #777;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="logo">
+                <h1>Your E-commerce Website</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart <span id="cart-counter"></span></a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </nav>
+        </header>
+        </div>
+    <main>
+        <h1>Welcome to Your E-commerce Website</h1>
+        <p>Discover our amazing collection of products and find exactly what you need.</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </main>
+
+    <footer>
+        <p class="footer-text">&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+    
+    <script src="app.js"></script>
+    <script>
+        // Update the cart counter on the index.html page
+        function updateCartCounter() {
+            const cartCounter = document.getElementById("cart-counter");
+            cartCounter.textContent = cartItems.length;
+        }
+
+        // Call the updateCartCounter function when the page loads
+        window.addEventListener("DOMContentLoaded", updateCartCounter);
+    </script>
+</body>
+</html>

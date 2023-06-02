@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product 1 - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="images" href="images">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your E-commerce Website</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="product-details">
+                <div class="product-image">
+                    <img src="images/product1.png" alt="Product 1" style="max-width: 500px;max-height: 500px;">
+                </div>  
+                <div class="product-info">
+                    <h2>Product 1</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at augue non nisl tristique congue sed a justo. Curabitur a dui vitae ipsum lobortis lacinia.</p>
+                    <span class="price">$9.99</span>
+                    <button onclick="handleAddToCartClick('product1')">Add to Cart</button>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Update the cart counter on the index.html page
+        function updateCartCounter() {
+            const cartCounter = document.getElementById("cart-counter");
+            cartCounter.textContent = cartItems.length;
+        }
+
+        // Call the updateCartCounter function when the page loads
+        window.addEventListener("DOMContentLoaded", updateCartCounter);
+    </script>
+
+</body>
+</html>

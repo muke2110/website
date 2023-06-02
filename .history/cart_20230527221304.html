@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your E-commerce Website</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart <span id="cart-counter"></span></a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items" class="cart-items"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Display the cart items in the cart.html page
+        const cartItemsContainer = document.getElementById("cart-items");
+
+        // Function to remove an item from the cart
+        function removeFromCart(productId) {
+            // Find the index of the item in the cartItems array
+            const index = cartItems.findIndex(item => item.id === productId);
+
+            if (index !== -1) {
+                // Remove the item from the cartItems array
+                cartItems.splice(index, 1);
+
+                // Save the updated cartItems array in local storage
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+                // Update the cart counter
+                updateCartCounter();
+
+                // Refresh the cart items display
+                displayCartItems();
+            }
+        }
+
+        // Function to display the cart items in the cart.html page
+        // Function to display the cart items in the cart.html page
+function displayCartItems() {
+  // Check if the cart is empty
+  if (cartItems.length === 0) {
+    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+  } else {
+    cartItemsContainer.innerHTML = "";
+
+    cartItems.forEach(item => {
+      const cartItem = document.createElement("div");
+      cartItem.classList.add("cart-item");
+
+      const itemImage = document.createElement("img");
+      itemImage.src = item.image;
+      itemImage.alt = item.name;
+      cartItem.appendChild(itemImage);
+
+      const itemDetails = document.createElement("div");
+      itemDetails.classList.add("cart-item-details");
+
+      const itemName = document.createElement("h3");
+      itemName.classList.add("cart-item-name");
+      itemName.textContent = item.name;
+      itemDetails.appendChild(itemName);
+
+      const itemPrice = document.createElement("p");
+      itemPrice.classList.add("cart-item-price");
+      itemPrice.textContent = "Price: $" + item.price;
+      itemDetails.appendChild(itemPrice);
+
+      const itemQuantity = document.createElement("p");
+      itemQuantity.classList.add("cart-item-quantity");
+      itemQuantity.textContent = "Quantity: " + item.quantity;
+      itemDetails.appendChild(itemQuantity);
+
+      const itemTotal = document.createElement("p");
+      itemTotal.classList.add("cart-item-total");
+      itemTotal.textContent = "Total: $" + (item.price * item.quantity);
+      itemDetails.appendChild(itemTotal);
+
+      const removeButton = document.createElement("button");
+      removeButton.classList.add("cart-item-remove");
+      removeButton.textContent = "Remove";
+      removeButton.addEventListener("click", () => removeFromCart(item.id));
+      itemDetails.appendChild(removeButton);
+
+      cartItem.appendChild(itemDetails);
+
+      cartItemsContainer.appendChild(cartItem);
+    });
+  }
+}
+
+
+        // Call the displayCartItems function when the page loads
+        window.addEventListener("DOMContentLoaded", displayCartItems);
+    </script>
+</body>
+</html>

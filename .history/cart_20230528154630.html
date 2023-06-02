@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Your E-commerce Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your E-commerce Website</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart <span id="cart-counter"></span></a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Shopping Cart</h2>
+            <div id="cart-items"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your E-commerce Website. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script>
+        // Display the cart items in the cart.html page
+        const cartItemsContainer = document.getElementById("cart-items");
+
+        // Function to remove an item from the cart
+        function removeFromCart(productId) {
+            // Find the index of the item in the cartItems array
+            const index = cartItems.findIndex(item => item.id === productId);
+
+            if (index !== -1) {
+                // Remove the item from the cartItems array
+                cartItems.splice(index, 1);
+
+                // Save the updated cartItems array in local storage
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+                // Update the cart counter
+                updateCartCounter();
+
+                // Refresh the cart items display
+                displayCartItems();
+            }
+        }
+
+        // Function to display the cart items in the cart.html page
+        function displayCartItems() {
+  const cartItemsContainer = document.getElementById("cart-items");
+  let totalAmount = 0;
+
+  // Check if the cart is empty
+  if (cartItems.length === 0) {
+    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+  } else {
+    let itemsHTML = "<h3>Cart Items</h3><ul>";
+
+    // Loop through each item in the cart
+    cartItems.forEach(item => {
+      const product = getProductById(item.id);
+      const amount = product.price * item.quantity;
+      totalAmount += amount;
+
+      itemsHTML += `
+        <li>
+          <img src="${product.image}" alt="${product.name}" style="width: 100px; height: 100px;" />
+          <div>
+            <h4>${product.name}</h4>
+            <p>Price: $${product.price}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Amount: $${amount}</p>
+            <button onclick="removeFromCart('${item.id}')">Remove</button>
+          </div>
+        </li>
+      `;
+    });
+
+    itemsHTML += "</ul>";
+;li
+    // Add the total amont to the cart
+    itemsHTML += `<p>Total Amount: $${totalAmount}</p>`;
+
+    cartItemsContainer.innerHTML = itemsHTML;
+  }
+}
+
+
+        // Call the displayCartItems function when the page loads
+        window.addEventListener("DOMContentLoaded", displayCartItems);
+    </script>
+</body>
+</html>
